@@ -11,17 +11,19 @@ function getMatchDetails(matchLink){
 }
 
 
+
 function processData(html){
+    //console.log(typeof html);
     let myDocument = cheerio.load(html);
     let bothInnings = myDocument(".card.content-block.match-scorecard-table .Collapsible");
-    for(let i=0 ; i<bothInnings.length ; i++){
+    for(let i=0 ; i<bothInnings.length ; i++){ // for each inning of a match
         let oneInning = myDocument(bothInnings[i]);
         // <div class="Collapsible"></div>
         let teamName = oneInning.find("h5").text();
         teamName = teamName.split("INNINGS")[0].trim();
         console.log(teamName);
         let allTrs = oneInning.find(".table.batsman tbody tr");
-        for(let j=0 ; j<allTrs.length-1 ; j++){
+        for(let j=0 ; j<allTrs.length-1 ; j++){ //for each batsman in one inning of a match
             let allTds = myDocument(allTrs[j]).find("td");
             if(allTds.length > 1){
                 // batsmanName allTds[0]
@@ -78,7 +80,7 @@ function createBatsmanFile(teamName , batsmanName , runs , balls , fours , sixes
     }
     batsmanFile.push(inning);
     fs.writeFileSync( batsmanFilePath , JSON.stringify(batsmanFile) );
-}
+} 
 function createTeamFolder(teamName){
     let teamFolderPath = `./IPL/${teamName}`;
     fs.mkdirSync(teamFolderPath);

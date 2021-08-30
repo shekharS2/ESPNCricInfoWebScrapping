@@ -18,7 +18,8 @@ function processData(html){
     //    { "0" : {aTag} , ......... "59" : {aTag} };
     for(let i=0 ; i<allATags.length ; i++){
         let matchLink =  "https://www.espncricinfo.com" + myDocument(allATags[i]).attr("href");
-        // console.log(matchLink);
+        //console.log(matchLink);
+        setTimeout(getMatchDetails, 20*1000, matchLink);
         getMatchDetails(matchLink);
     }   
 }
