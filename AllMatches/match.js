@@ -14,7 +14,7 @@ function getMatchDetails(matchLink){
 
 function processData(html){
     //console.log(typeof html);
-    let myDocument = cheerio.load(html);
+    let myDocument = cheerio.load(html + "");
     let bothInnings = myDocument(".card.content-block.match-scorecard-table .Collapsible");
     for(let i=0 ; i<bothInnings.length ; i++){ // for each inning of a match
         let oneInning = myDocument(bothInnings[i]);
@@ -23,7 +23,7 @@ function processData(html){
         teamName = teamName.split("INNINGS")[0].trim();
         console.log(teamName);
         let allTrs = oneInning.find(".table.batsman tbody tr");
-        for(let j=0 ; j<allTrs.length-1 ; j++){ //for each batsman in one inning of a match
+        for(let j=0 ; j<allTrs.length-1 ; j++){ //for each batsman in one inning (==one team) of a match
             let allTds = myDocument(allTrs[j]).find("td");
             if(allTds.length > 1){
                 // batsmanName allTds[0]

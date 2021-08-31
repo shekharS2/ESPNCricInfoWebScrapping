@@ -12,7 +12,7 @@ function getAllMatches(allMatchesLink){
 
 
 function processData(html){
-    let myDocument = cheerio.load(html);
+    let myDocument = cheerio.load(html + "");
     let allATags = myDocument('a[data-hover="Scorecard"]');
     console.log(allATags.length);
     //    { "0" : {aTag} , ......... "59" : {aTag} };
